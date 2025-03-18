@@ -1,0 +1,73 @@
+{% extends "base.html" %} {% block title %} HairPhenomics {% endblock %}
+{% block content %}
+{% load static %}
+
+
+<body>
+
+    <div class="mainbox">
+
+        <div class="container">
+            <div class="title">
+                <div class="logo">
+                    <img src ="{% static 'RMLogo.png' %}" alt="Logo" height="100px" width="100px"> 
+                </div>
+                <div class="header">
+                    <h1>RoomMate</h1>
+                </div>
+            </div>
+            
+        
+            <div class="row gy-3">
+                <div class="col-sm-4">
+                    <div class="card text-center h-100" style="width: 25rem;">
+                        <img class="card-img-top" src="{% static 'RMLogo.png' %}" alt="Logo" height="190">
+                        <div class="card-body">
+                            <h5 class="card-title">Log In</h5>
+                            <p class="card-text">Join RoomMate Today!</p>
+                            <a href="#" class="btn btn-primary">Log In</a>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="col-sm-4">
+                    <div class="card text-center h-100" style="width: 25rem;">
+                        <img class="card-img-top" src="{% static 'roommates.png' %}" alt="Search" height="190">
+                        <div class="card-body">
+                            <h5 class="card-title">Search</h5>
+                            <p class="card-text">Search for compatible roommates</p>
+                            <a href="#" class="btn btn-primary">Search</a>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="col-sm-4">
+                    <div class="card text-center h-100" style="width: 25rem;">
+                        <img class="card-img-top" src="{% static 'inbox.png' %}" alt="Inbox" height="190">
+                        <div class="card-body">
+                            <h5 class="card-title">View Match Requests</h5>
+                            <p class="card-text">Manage your inbox and see if anyone is interested</p>
+                            <a href="#" class="btn btn-primary">Inbox</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        
+
+        </div>
+    </div>
+    <div class="container community">
+
+        <h1>What is RoomMate?</h1>
+
+        <p>RoomMate is a roommate matching services created by Josh Santiago, Gaynay Doo, and Cayden Calo. RoomMate seeks to streamline the roommate search by offering an easy, hassle-free platform
+         for people to use. Create a profile, select your living preferences, and get matched with people who won't make you pull out your hair in frustration. Sign up now!
+        </p>
+
+    
+
+        
+    </div>
+</body>
+{% endblock %}
