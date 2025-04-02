@@ -25,7 +25,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Log In</h5>
                             <p class="card-text">Join RoomMate Today!</p>
-                            <a href="#" class="btn btn-primary">Log In</a>
+                            <a href="{% url 'login' %}" class="btn btn-primary">Log In</a>
                         </div>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Search</h5>
                             <p class="card-text">Search for compatible roommates</p>
-                            <a href="#" class="btn btn-primary">Search</a>
+                            <a href="{% url 'set_preferences' %}" class="btn btn-primary">Search</a>
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                         <div class="card-body">
                             <h5 class="card-title">View Match Requests</h5>
                             <p class="card-text">Manage your inbox and see if anyone is interested</p>
-                            <a href="#" class="btn btn-primary">Inbox</a>
+                            <a href="{% url 'find_matches' %}" class="btn btn-primary">Inbox</a>
                         </div>
                     </div>
                 </div>
