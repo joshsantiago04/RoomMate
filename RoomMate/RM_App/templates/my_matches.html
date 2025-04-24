@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="gradientbox">
+    <div class="container mt-4">
+        <h2>Your Current Matches</h2>
+        {% if mutual_matches %}
+            <div class="row">
+                {% for other_user in mutual_matches %}
+                    <div class="col-md-6">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                
+                                <h4 class="card-title">{{ other_user.username }}</h4>
+                                <p><strong>Bio:</strong> {{ other_user.userprofile.bio }}</p>
+                                <p><strong>Age:</strong> {{ other_user.userprofile.age }}</p>
+                                <p><strong>Gender:</strong> {{ other_user.userprofile.gender }}</p>
+
+                                {# Displays Instragram and Snapchat links if they are available #}
+                                {% if other_user.userprofile.instagram_link %}
+                                    <a href="{{ other_user.userprofile.instagram_link }}" class="btn btn-primary">Instragram</a>
+
+                                {% elif other_user.userprofile.snapchat_link %}
+                                    <a href="{{ other_user.userprofile.snapchat_link }}" class="btn btn-primary">Snapchat</a>
+
+                                {% else %}
+                                    <span class="text-muted me-2">No Socials Provided!</span>
+
+                                {% endif %}
+
+                                <form method="post"
+                                    action="{% url 'unmatch_user' other_user.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">
+                                    Unmatch
+                                </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {% else %}
+            <p>No accepted matches yet!</p>
+            <p><i>Users who accept your matches will appear here! If a user accepts your request, both will be able to view each other's social media information for contact.</i></p>
+            <a class="btn btn-primary" href="{% url 'home' %}" >Back to Home</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

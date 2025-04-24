@@ -5,8 +5,10 @@ class UserProfile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     age = models.IntegerField()
-    gender = models.CharField(max_length=10, choices=[('Male', 'Male'), ('Female', 'Female'), ('Other', 'Other')])
+    gender = models.CharField(max_length=10, choices=[('M', 'Male'), ('F', 'Female'), ('O', 'Other')])
     bio = models.TextField(blank=True)
+    instagram_link = models.URLField(blank=True, null=True)
+    snapchat_link = models.URLField(blank=True, null=True)
     
     def __str__(self):
         return self.user.username
@@ -30,3 +32,15 @@ class Match(models.Model):
 
     def __str__(self):
         return f"Match: {self.user1.user.username} & {self.user2.user.username} - Score: {self.score}"
+
+class MatchRequest(models.Model):
+    from_user = models.ForeignKey(User, related_name='sent_matches', on_delete=models.CASCADE)
+    to_user = models.ForeignKey(User, related_name='received_matches', on_delete=models.CASCADE)
+    is_confirmed = models.BooleanField(default=False)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('from_user', 'to_user')  # no duplicates
+
+    def __str__(self):
+        return f"{self.from_user.username} → {self.to_user.username} ({'Confirmed' if self.is_confirmed else 'Pending'})"

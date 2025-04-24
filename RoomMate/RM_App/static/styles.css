@@ -1,0 +1,115 @@
+/* GENERAL STYLES */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: auto;
+}
+
+/* gradientbox STYLES */
+.gradientbox {
+    background: linear-gradient(to right, #532f25, #14032d);
+    padding: 30px;
+    margin-bottom: 10px;
+    border-bottom: 3px solid rgb(24, 24, 24);
+}
+
+/* LOGIN AND REGISTER PAGE SPECIFIC STYLES */
+body.login-page .gradientbox {
+    padding-top: 200px;
+    padding-bottom: 200px;
+}
+
+body.register-page .gradientbox {
+
+    padding-top: 100px;
+    padding-bottom: 200px;
+}
+
+body.login-page .container,
+body.register-page .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: auto;
+}
+
+/* TITLE STYLES */
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* ROW & COLUMN STYLES */
+.row {
+    margin: 20px 0;
+}
+
+.col-sm-4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CARD STYLES */
+.card {
+    transition: all 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-img-top {
+    width: 100%;
+    display: flex;
+    object-fit: cover;
+}
+
+/* NAVBAR */
+.navbar {
+    border-bottom: 3px solid rgb(24, 24, 24);
+}
+
+.navbar-brand, .nav-item {
+    padding-left: 1%;
+}
+
+.ms-auto {
+    padding-right: 20px;
+}
+
+/* FORM INPUT STYLES */
+.mb-3 input {
+    width: 100%;
+    max-width: 400px;
+    min-width: 300px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* ALERT */
+.alert {
+    position: absolute;
+    top: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40%;
+    text-align: center;
+    z-index: 10;
+}
+
+/* HOVER ANIMATIONS */
+.hoveranimation, .card {
+    transition: all 0.3s;
+}
+
+.hoveranimation:hover, .card:hover {
+    transform: scale(1.05);
+}

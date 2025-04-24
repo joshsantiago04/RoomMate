@@ -2,11 +2,8 @@
 {% block content %}
 {% load static %}
 
-
 <body>
-
-    <div class="mainbox">
-
+    <div class="gradientbox">
         <div class="container">
             <div class="title">
                 <div class="logo">
@@ -16,16 +13,25 @@
                     <h1>RoomMate</h1>
                 </div>
             </div>
-            
-        
+
             <div class="row gy-3">
                 <div class="col-sm-4">
                     <div class="card text-center h-100" style="width: 25rem;">
                         <img class="card-img-top" src="{% static 'RMLogo.png' %}" alt="Logo" height="190">
                         <div class="card-body">
-                            <h5 class="card-title">Log In</h5>
-                            <p class="card-text">Join RoomMate Today!</p>
-                            <a href="{% url 'login' %}" class="btn btn-primary">Log In</a>
+
+                            {% if user.is_authenticated %}
+                                <h5 class="card-title">Welcome!</h5>
+                                <p class="card-text">Logged in as: <b>{{ user.username }}</b></p>
+                                <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
+                                
+                            {% else %}
+                                <h5 class="card-title">Log In</h5>
+                                <p class="card-text">Join RoomMate Today!</p>
+                                <a class="btn btn-primary" href="{% url 'login' %}" >Log In</a>
+
+                            {% endif %}
+
                         </div>
                     </div>
                 </div>
@@ -34,27 +40,46 @@
                     <div class="card text-center h-100" style="width: 25rem;">
                         <img class="card-img-top" src="{% static 'roommates.png' %}" alt="Search" height="190">
                         <div class="card-body">
-                            <h5 class="card-title">Search</h5>
-                            <p class="card-text">Search for compatible roommates</p>
-                            <a href="{% url 'set_preferences' %}" class="btn btn-primary">Search</a>
+
+
+                        {% if user.is_authenticated %}
+
+                            <h5 class="card-title">Edit Profile</h5>
+                            <p class="card-text">Customize your preferences and information to get the best matches possible!</p>
+                            <a href="{% url 'set_preferences' %}" class="btn btn-primary">Edit Profile</a>
+                            
+                        {% else %}
+                            <h5 class="card-title">RoomMate Searching Made Easy!</h5>
+                            <p class="card-text">No cost, no stress, no bad roommates!</p>
+
+                        {% endif %}
                         </div>
                     </div>
                 </div>
         
                 <div class="col-sm-4">
                     <div class="card text-center h-100" style="width: 25rem;">
-                        <img class="card-img-top" src="{% static 'inbox.png' %}" alt="Inbox" height="190">
-                        <div class="card-body">
-                            <h5 class="card-title">View Match Requests</h5>
-                            <p class="card-text">Manage your inbox and see if anyone is interested</p>
-                            <a href="{% url 'find_matches' %}" class="btn btn-primary">Inbox</a>
+
+                        {% if user.is_authenticated %}
+                            <img class="card-img-top" src="{% static 'inbox.png' %}" alt="Inbox" height="190">
+                            <div class="card-body">
+                                    <h5 class="card-title">Find Your RoomMate!</h5>
+                                    <p class="card-text">Find the perfect roommate and view your matched roommates!</p>
+                                    <a href="{% url 'find_matches' %}" class="btn btn-primary">Matches</a>
+                            </div>
+                        {% else %}
+
+                            <img class="card-img-top" src="{% static 'ryan.png' %}" alt="Guy named Ryan" height="190">
+                            <div class="card-body">
+                                <h5 class="card-title">Ryan M. says:</h5>
+                                <p class="card-text"><i>"I've had my fair share of trouble when trying to find roommates as a student. With RoomMate, I found the best within the same day!"</i></p>
+                            </div>
+                        {% endif %}
+
                         </div>
                     </div>
                 </div>
             </div>
-        
-        
-
         </div>
     </div>
     <div class="container community">
@@ -64,10 +89,6 @@
         <p>RoomMate is a roommate matching services created by Josh Santiago, Gaynay Doo, and Cayden Calo. RoomMate seeks to streamline the roommate search by offering an easy, hassle-free platform
          for people to use. Create a profile, select your living preferences, and get matched with people who won't make you pull out your hair in frustration. Sign up now!
         </p>
-
-    
-
-        
     </div>
 </body>
 {% endblock %}

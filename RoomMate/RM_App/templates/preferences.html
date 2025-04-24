@@ -1,9 +1,69 @@
 {% extends "base.html" %}
-
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Preferences</button>
-</form>
+{% load static %}
+
+<body class="preferences-page">
+    <div class="gradientbox">
+        <div class="container">
+            <h2>Edit Profile</h2>
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="mb-3 hoveranimation">
+                    {{ profile_form.age.label }}
+                    {{ profile_form.age }}
+                </div>
+
+                <div class="mb-3 hoveranimation">
+                    {{ profile_form.gender.label }}
+                    {{ profile_form.gender }}
+                </div>
+
+                <div class="mb-3 hoveranimation">
+                    {{ profile_form.bio.label }}
+                    {{ profile_form.bio }}
+                </div>
+            
+                <div class="mb-3 hoveranimation">
+                    {{ profile_form.instagram_link.label }}
+                    {{ profile_form.instagram_link }}
+                </div>
+
+                <div class="mb-3 hoveranimation">
+                    {{ profile_form.snapchat_link.label }}
+                    {{ profile_form.snapchat_link }}
+                </div>
+
+                <h2>Your Preferences</h2> 
+
+                <div class="form-check">
+                    {{ preference_form.smoking.label }}
+                    {{ preference_form.smoking }} 
+                </div>
+
+ 
+                <div class="preference_form-check">
+                    {{ preference_form.pets }}
+                    {{ preference_form.pets.label }}
+                </div>
+
+                <div class="mb-3">
+                    {{ preference_form.noise_level.label }}
+                    {{ preference_form.noise_level }}
+                </div>
+
+                <div class="mb-3">
+                    {{ preference_form.sleep_schedule.label }}
+                    {{ preference_form.sleep_schedule }}
+                </div>
+
+                <button type="submit" class="btn btn-primary mb-3">Save Preferences</button>
+            </form>
+
+            <a class="btn btn-primary" href="{% url 'home' %}" >Back to Home</a>
+        </div>
+
+        
+    </div>
+</body>
 {% endblock %}

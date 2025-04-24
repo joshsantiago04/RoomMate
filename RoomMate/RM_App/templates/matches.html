@@ -1,13 +1,74 @@
 {% extends "base.html" %}
-
 {% block content %}
+{% load static %}
 
+<div class="gradientbox">
+    <div class="container mt-4">
+        <h2>Your Top RoomMate Matches</h2>
+        <p><i>Want to see your current matches? <a href="{% url 'my_matches' %}">Click here!</i></a></p>
 
-<h2>Your Matches</h2>
-<ul>
-    {% for match, score in matches %}
-        <li>{{ match.user.username }} - Match Score: {{ score }}</li>
-    {% endfor %}
-</ul>
+        {% for match in matches %}
 
+        <div class="card mb-4">
+            <div class="card-body">
+
+                <h4 class="card-title">
+                    {{ match.profile.user.username }} — {{ match.score }}% Compatible
+                </h4>
+
+                <p><strong>Bio:</strong> {{ match.profile.bio }}</p>
+                <p><strong>Age:</strong> {{ match.profile.age }}</p>
+                <p><strong>Gender:</strong> {{ match.profile.gender }}</p>
+
+                <h6>Preferences:</h6>
+                <ul>
+                    <li>Smoking: {{ match.preference.smoking }}</li>
+                    <li>Pets: {{ match.preference.pets }}</li>
+                    <li>Noise Level: {{ match.preference.noise_level }}</li>
+                    <li>Sleep Schedule: {{ match.preference.sleep_schedule }}</li>
+                </ul>
+
+                {% if match.profile.id in mutual_confirmed %}
+                    {# Already mutually matched → show Unmatch #}
+                    <form method="post"
+                        action="{% url 'unmatch_user' match.profile.id %}"
+                        class="mt-2">
+                    {% csrf_token %}
+                    <button class="btn btn-danger">Unmatch</button>
+                    </form>
+
+                {% elif match.profile.id in received_requests %}
+                    {# They sent you a request → you can confirm #}
+                    <form method="post"
+                        action="{% url 'confirm_match' match.profile.id %}"
+                        class="mt-2">
+                    {% csrf_token %}
+                    <button class="btn btn-primary">Confirm Match</button>
+                    </form>
+
+                {% elif match.profile.id in sent_requests %}
+                    {# You sent them a request → can unsend #}
+                    <form method="post"
+                        action="{% url 'unsend_match_request' match.profile.id %}"
+                        class="mt-2">
+                    {% csrf_token %}
+                    <button class="btn btn-warning">Unsend Request</button>
+                    </form>
+
+                {% else %}
+                    {# No requests yet → send one #}
+                    <form method="post"
+                        action="{% url 'send_match_request' match.profile.id %}"
+                        class="mt-2">
+                    {% csrf_token %}
+                    <button class="btn btn-success">Send Match Request</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <p>No matches found!</p>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

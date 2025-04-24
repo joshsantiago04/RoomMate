@@ -1,11 +1,46 @@
 {% extends "base.html" %}
-
 {% block content %}
-<h2>Login</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Log In</button>
-</form>
-<p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+{% load static %}
+
+<body class="login-page">
+        <div class="gradientbox">
+
+            
+            <div class="title" style="margin-bottom: 20px;">
+                <div class="logo">
+                    <img src ="{% static 'RMLogo.png' %}" alt="Logo" height="100px" width="100px"> 
+                </div>
+                <div class="header">
+                    <h1>RoomMate</h1>
+                </div>
+            </div>
+            <div class="container">
+
+
+                <h2>Log In</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <ul>
+                            {% for field, errors in form.errors.items %}
+                                {% for error in errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+
+                    <div class="mb-3 hoveranimation">{{ form.username }}</div>
+                    <div class="mb-3 hoveranimation">{{ form.password }}</div>
+                
+                    <button type="submit" class="btn btn-primary w-10" style="margin-bottom: 10px;">Log In</button>
+                </form>
+                <p><i>Don't have an account? <a href="{% url 'register' %}">Register here</i></a></p>
+            </div>
+        </div>
+</body>
+
+
 {% endblock %}
